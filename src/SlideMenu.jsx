@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import DurationSlider from "./DurationSlider";
+import MenuSlider from "./MenuSlider";
 
 const Menu = styled.div`
   width: 20vw;
@@ -25,7 +25,10 @@ const Menu = styled.div`
 const SlideMenu = (props) => {
   return (
     <Menu hideto={props.hideto}>
-      <DurationSlider title={"Duration"}></DurationSlider>
+      <MenuSlider max={60} initial={10} title={"Focus"}></MenuSlider>
+      <MenuSlider max={60} initial={5} title={"Short Break"}></MenuSlider>
+      <MenuSlider max={60} initial={15} title={"Long Break"}></MenuSlider>
+      <MenuSlider max={12} initial={4} title={"Rounds"}></MenuSlider>
     </Menu>
   );
 };

@@ -46,22 +46,20 @@ const SliderDiv = styled.div`
   width: 85%;
 `;
 
-const DurationSlider = (props) => {
-  const [value, setValue] = useState(20);
+const MenuSlider = ({ initial, max, title }) => {
+  const [value, setValue] = useState(initial);
 
   const handleChange = (event) => {
-    console.log("setting val");
-
     setValue(event.target.value);
   };
 
   return (
     <SliderDiv>
-      <Text>{props.title}</Text>
+      <Text>{title}</Text>
       <Slider
         type="range"
         min="1"
-        max="60"
+        max={max}
         value={value}
         onChange={handleChange}
       ></Slider>
@@ -70,4 +68,4 @@ const DurationSlider = (props) => {
   );
 };
 
-export default DurationSlider;
+export default MenuSlider;
