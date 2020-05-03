@@ -46,7 +46,7 @@ const App = () => {
   const [longBreakDuration, setLongBreakDuration] = useState(25);
   const [rounds, setRounds] = useState(2);
   const [notify, setNotify] = useState(false);
-  const [curRound, setCurRound] = useState(ROUND_FOCUS);
+  const [curRound, setCurRound] = useState("");
   const [roundNo, setRoundNo] = useState(1);
 
   const getCurrentRoundDuration = () => {
@@ -61,14 +61,12 @@ const App = () => {
     }
   };
 
-  const start = () => {
-    useInterval(
-      () => {
-        setTime(time + 1);
-      },
-      time === getCurrentRoundDuration() ? null : 1000
-    );
-  };
+  useInterval(
+    () => {
+      setTime(time + 1);
+    },
+    time === getCurrentRoundDuration() ? null : 1000
+  );
 
   const toggleMenu = () => {
     setHidden(!hidden);
@@ -101,12 +99,13 @@ const App = () => {
       <Container>
         <Text size={2}>{`Round ${roundNo} / ${rounds}`}</Text>
         <Text size={3}>{curRound}</Text>
-        <Text size={3}>{time ? time : "DONE"}</Text>
+        <Text size={3}>{time ? time : null}</Text>
         {time === getCurrentRoundDuration() ? iterateRound() : null}
         <DurationProgressBar
           value={time}
           max={getCurrentRoundDuration()}
         ></DurationProgressBar>
+        <button onClick={() => setCurRound(ROUND_FOCUS)}> start </button>
       </Container>
     </Theme>
   );
