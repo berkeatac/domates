@@ -31,6 +31,21 @@ const Text = styled.p`
   font-family: "Helvetica";
 `;
 
+const StartButton = styled.button`
+  height: 50px;
+  width: 100px;
+  background-color: ${(props) => props.theme.colors.tomato};
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  & > p {
+    margin: 0px;
+  }
+`;
+
 const notify = () => {
   if (Notification.permission === "granted") {
     // If it's okay let's create a notification
@@ -94,18 +109,26 @@ const App = () => {
 
   return (
     <Theme>
-      <SlideMenu hideto={hidden} />
+      <SlideMenu
+        hideto={hidden}
+        setFocusRoundDuration={setFocusRoundDuration}
+        setShortBreakDuration={setShortBreakDuration}
+        setLongBreakDuration={setLongBreakDuration}
+        setRounds={setRounds}
+      />
       <Header toggleMenu={toggleMenu}></Header>
       <Container>
         <Text size={2}>{`Round ${roundNo} / ${rounds}`}</Text>
         <Text size={3}>{curRound}</Text>
-        <Text size={3}>{time ? time : null}</Text>
+        <Text size={3}>{time ? time : " "}</Text>
         {time === getCurrentRoundDuration() ? iterateRound() : null}
         <DurationProgressBar
           value={time}
           max={getCurrentRoundDuration()}
         ></DurationProgressBar>
-        <button onClick={() => setCurRound(ROUND_FOCUS)}> start </button>
+        <StartButton onClick={() => setCurRound(ROUND_FOCUS)}>
+          <Text size={2}>start</Text>
+        </StartButton>
       </Container>
     </Theme>
   );

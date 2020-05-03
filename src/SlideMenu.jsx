@@ -23,8 +23,15 @@ const Menu = styled.div`
 `;
 
 const SlideMenu = (props) => {
+  const {
+    hideto,
+    setFocusRoundDuration,
+    setShortBreakDuration,
+    setLongBreakDuration,
+    setRounds,
+  } = props;
   return (
-    <Menu hideto={props.hideto}>
+    <Menu hideto={hideto}>
       <MenuSlider max={60} initial={10} title={"Focus"}></MenuSlider>
       <MenuSlider max={60} initial={5} title={"Short Break"}></MenuSlider>
       <MenuSlider max={60} initial={15} title={"Long Break"}></MenuSlider>
