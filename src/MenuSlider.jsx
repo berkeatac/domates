@@ -46,11 +46,12 @@ const SliderDiv = styled.div`
   width: 85%;
 `;
 
-const MenuSlider = ({ initial, max, title }) => {
+const MenuSlider = ({ initial, max, title, setPomoValue }) => {
   const [value, setValue] = useState(initial);
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    setPomoValue(parseFloat(event.target.value));
   };
 
   return (

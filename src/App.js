@@ -5,7 +5,7 @@ import DurationProgressBar from "./DurationProgressBar";
 import Theme from "./Theme";
 import Header from "./Header";
 
-import { useInterval } from "./utils";
+import { useInterval, parseTime } from "./utils";
 
 const ROUND_FOCUS = "Focus";
 const ROUND_SHORT_BREAK = "Short Break";
@@ -33,7 +33,7 @@ const Text = styled.p`
 
 const StartButton = styled.button`
   height: 50px;
-  width: 100px;
+  width: 160px;
   background-color: ${(props) => props.theme.colors.tomato};
   border: none;
   border-radius: 20px;
@@ -58,11 +58,12 @@ const App = () => {
   const [time, setTime] = useState(0);
   const [focusRoundDuration, setFocusRoundDuration] = useState(10);
   const [shortBreakDuration, setShortBreakDuration] = useState(5);
-  const [longBreakDuration, setLongBreakDuration] = useState(25);
-  const [rounds, setRounds] = useState(2);
+  const [longBreakDuration, setLongBreakDuration] = useState(15);
+  const [rounds, setRounds] = useState(4);
   const [notify, setNotify] = useState(false);
   const [curRound, setCurRound] = useState("");
   const [roundNo, setRoundNo] = useState(1);
+  const [isStopped, setIsStopped] = useState(false);
 
   const getCurrentRoundDuration = () => {
     if (curRound === ROUND_FOCUS) {
@@ -80,7 +81,7 @@ const App = () => {
     () => {
       setTime(time + 1);
     },
-    time === getCurrentRoundDuration() ? null : 1000
+    time === getCurrentRoundDuration() * 60 || isStopped ? null : 1000
   );
 
   const toggleMenu = () => {
@@ -120,14 +121,18 @@ const App = () => {
       <Container>
         <Text size={2}>{`Round ${roundNo} / ${rounds}`}</Text>
         <Text size={3}>{curRound}</Text>
-        <Text size={3}>{time ? time : " "}</Text>
-        {time === getCurrentRoundDuration() ? iterateRound() : null}
+        <Text size={3}>{time ? parseTime(time) : " "}</Text>
+        {time === getCurrentRoundDuration() * 60 ? iterateRound() : null}
+        {console.log(time, getCurrentRoundDuration(), isStopped)}
         <DurationProgressBar
           value={time}
-          max={getCurrentRoundDuration()}
+          max={getCurrentRoundDuration() * 60}
         ></DurationProgressBar>
         <StartButton onClick={() => setCurRound(ROUND_FOCUS)}>
           <Text size={2}>start</Text>
+        </StartButton>
+        <StartButton onClick={() => setIsStopped(!isStopped)}>
+          <Text size={2}>stop/resume</Text>
         </StartButton>
       </Container>
     </Theme>

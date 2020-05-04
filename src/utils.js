@@ -19,3 +19,11 @@ export const useInterval = (callback, delay) => {
     }
   }, [delay]);
 };
+
+export const parseTime = (secs) => {
+  const mins = Math.floor(secs / 60);
+  const seconds = secs % 60;
+  return `${mins < 10 ? "0" + mins : mins}:${
+    seconds < 10 ? "0" + seconds : seconds
+  }`;
+};
