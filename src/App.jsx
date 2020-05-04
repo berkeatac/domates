@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import SlideMenu from "./SlideMenu";
 import DurationProgressBar from "./DurationProgressBar";
 import Theme from "./Theme";
 import Header from "./Header";
-
-import { useInterval, parseTime } from "./utils";
+import ControlButton from "./ControlButton";
+import { Text } from "./CommonElements";
+import { useInterval, parseTime, notify } from "./utils";
 
 const ROUND_FOCUS = "Focus";
 const ROUND_SHORT_BREAK = "Short Break";
@@ -25,41 +27,13 @@ const Container = styled.div`
   }
 `;
 
-const Text = styled.p`
-  color: ${(props) => props.theme.colors.offWhite};
-  font-size: ${(props) => props.size}em;
-  font-family: "Helvetica";
-`;
-
-const StartButton = styled.button`
-  height: 50px;
-  width: 160px;
-  background-color: ${(props) => props.theme.colors.tomato};
-  border: none;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  & > p {
-    margin: 0px;
-  }
-`;
-
-const notify = () => {
-  if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    var notification = new Notification("Hi there!");
-  }
-};
-
 const App = () => {
-  const [hidden, setHidden] = useState(false);
   const [time, setTime] = useState(0);
   const [focusRoundDuration, setFocusRoundDuration] = useState(10);
   const [shortBreakDuration, setShortBreakDuration] = useState(5);
   const [longBreakDuration, setLongBreakDuration] = useState(15);
   const [rounds, setRounds] = useState(4);
+  const [hidden, setHidden] = useState(false);
   const [notify, setNotify] = useState(false);
   const [curRound, setCurRound] = useState("");
   const [roundNo, setRoundNo] = useState(1);
@@ -76,6 +50,10 @@ const App = () => {
       return 0;
     }
   };
+
+  useEffect(() => {
+    time === getCurrentRoundDuration() * 60 ? iterateRound() : null;
+  }, [time]);
 
   useInterval(
     () => {
@@ -122,18 +100,18 @@ const App = () => {
         <Text size={2}>{`Round ${roundNo} / ${rounds}`}</Text>
         <Text size={3}>{curRound}</Text>
         <Text size={3}>{time ? parseTime(time) : " "}</Text>
-        {time === getCurrentRoundDuration() * 60 ? iterateRound() : null}
-        {console.log(time, getCurrentRoundDuration(), isStopped)}
         <DurationProgressBar
           value={time}
           max={getCurrentRoundDuration() * 60}
         ></DurationProgressBar>
-        <StartButton onClick={() => setCurRound(ROUND_FOCUS)}>
-          <Text size={2}>start</Text>
-        </StartButton>
-        <StartButton onClick={() => setIsStopped(!isStopped)}>
-          <Text size={2}>stop/resume</Text>
-        </StartButton>
+        <ControlButton
+          buttonText={`start`}
+          onClick={() => setCurRound(ROUND_FOCUS)}
+        ></ControlButton>
+        <ControlButton
+          buttonText={`stop / resume`}
+          onClick={() => setIsStopped(!isStopped)}
+        ></ControlButton>
       </Container>
     </Theme>
   );

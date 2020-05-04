@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+
 import MenuSlider from "./MenuSlider";
 
 const Menu = styled.div`
@@ -16,9 +17,6 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  & > * {
-  }
 `;
 
 const SlideMenu = (props) => {

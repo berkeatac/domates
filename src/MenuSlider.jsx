@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { Text } from "./CommonElements";
 import { parseTime } from "./utils";
 
 const Slider = styled.input`
@@ -33,12 +34,6 @@ const Slider = styled.input`
     background: #4caf50;
     cursor: pointer;
   }
-`;
-
-const Text = styled.p`
-  color: ${(props) => props.theme.colors.offWhite};
-  font-size: ${(props) => (props.size ? props.size : 1)}em;
-  font-family: "Helvetica";
 `;
 
 const SliderDiv = styled.div`

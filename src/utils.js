@@ -27,3 +27,9 @@ export const parseTime = (secs) => {
     seconds < 10 ? "0" + seconds : seconds
   }`;
 };
+
+export const notify = (msg) => {
+  if (Notification.permission === "granted") {
+    var notification = new Notification(msg);
+  }
+};
