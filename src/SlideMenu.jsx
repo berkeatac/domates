@@ -8,10 +8,6 @@ const Menu = styled.div`
   position: fixed;
   top: 8vh;
   left: 0;
-  /* background-color: ${(props) =>
-    props.hideto
-      ? props.theme.colors.darkGrey
-      : props.theme.colors.lightGrey}; */
   background-color: rgba(255, 255, 255, 0.02);
   transition: transform 1s cubic-bezier(0, 0.52, 0, 1),
     background-color 1s cubic-bezier(0, 0.52, 0, 1);
@@ -58,6 +54,7 @@ const SlideMenu = (props) => {
         initial={4}
         title={"Rounds"}
         setPomoValue={setRounds}
+        noParse
       ></MenuSlider>
     </Menu>
   );

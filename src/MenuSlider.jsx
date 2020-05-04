@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { parseTime } from "./utils";
+
 const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
@@ -46,7 +48,7 @@ const SliderDiv = styled.div`
   width: 85%;
 `;
 
-const MenuSlider = ({ initial, max, title, setPomoValue }) => {
+const MenuSlider = ({ initial, max, title, setPomoValue, noParse }) => {
   const [value, setValue] = useState(initial);
 
   const handleChange = (event) => {
@@ -64,7 +66,7 @@ const MenuSlider = ({ initial, max, title, setPomoValue }) => {
         value={value}
         onChange={handleChange}
       ></Slider>
-      <Text>{value}</Text>
+      <Text>{noParse ? value : parseTime(value * 60)}</Text>
     </SliderDiv>
   );
 };
