@@ -7,7 +7,7 @@ import Theme from "./Theme";
 import Header from "./Header";
 import ControlButton from "./ControlButton";
 import { Text } from "./CommonElements";
-import { useInterval, parseTime, notify } from "./utils";
+import { useInterval, parseTime, sendNotif } from "./utils";
 
 const ROUND_FOCUS = "Focus";
 const ROUND_SHORT_BREAK = "Short Break";
@@ -71,18 +71,22 @@ const App = () => {
       if (roundNo < rounds) {
         setCurRound(ROUND_SHORT_BREAK);
         setTime(0);
+        sendNotif("Short Break Started");
       } else {
         setCurRound(ROUND_LONG_BREAK);
         setTime(0);
+        sendNotif("Long Break Started");
       }
     } else if (curRound === ROUND_SHORT_BREAK) {
       setRoundNo(roundNo + 1);
       setCurRound(ROUND_FOCUS);
       setTime(0);
+      sendNotif("Focus Round Started");
     } else if (curRound === ROUND_LONG_BREAK) {
       setRoundNo(1);
       setCurRound(ROUND_FOCUS);
       setTime(0);
+      sendNotif("Focus Round Started");
     }
   };
 

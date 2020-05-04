@@ -28,7 +28,7 @@ export const parseTime = (secs) => {
   }`;
 };
 
-export const notify = (msg) => {
+export const sendNotif = (msg) => {
   if (Notification.permission === "granted") {
     var notification = new Notification(msg);
   }
