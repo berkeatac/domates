@@ -8,6 +8,7 @@
     "customize-cra": "^0.9.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "react-scripts": "0.9.x",
     "styled-components": "^5.1.0"
   },
