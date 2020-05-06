@@ -5,6 +5,7 @@ import SlideMenu from "./SlideMenu";
 import DurationProgressBar from "./DurationProgressBar";
 import Theme from "./Theme";
 import Header from "./Header";
+import Footer from "./Footer";
 import ControlButton from "./ControlButton";
 import { Text } from "./CommonElements";
 import { useInterval, parseTime, sendNotif } from "./utils";
@@ -117,6 +118,7 @@ const App = () => {
           onClick={() => setIsStopped(!isStopped)}
         ></ControlButton>
       </Container>
+      <Footer></Footer>
     </Theme>
   );
 };
