@@ -1,6 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+### Pomodoro App
+Pomodoro app created with create-react-app.
+Has a sliding side-bar with custom animation.
+Uses styled-components for CSS-in-JS implementation.
 
-This is a basic Pomodoro application created with React.
 
-Utilizes hooks and has setInterval usage in hook.
-Has CSS animations on sidebar reveal/hide. On enabling, one can receive native WebAPI notifications on round changes.
+#### Todo
+Add sounds at round changes
